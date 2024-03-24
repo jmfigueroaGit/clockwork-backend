@@ -72,4 +72,4 @@ Contributions are welcome. Please fork the repository and create a pull request 
 
 ## Authors
 
-- **Jheremiah Figueroa** - _Web Developer_ - [YourName](https://github.com/jmfigueroaGit)
+- **Jm Figueroa** - _Web Developer_ - [JM Figueroa](https://github.com/jmfigueroaGit)
