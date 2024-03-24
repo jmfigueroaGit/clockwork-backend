@@ -46,8 +46,6 @@ Follow these steps to get the project up and running:
     DB_PASS_DEV =
     DB_PORT_DEV =
     DB_NAME_DEV =
-    CYPHER_LOGIN_IV =
-    CYPHER_SECRET_KEY =
     NODE_ENV = "development"
     SESSION_SECRET=
     JWT_SECRET=
