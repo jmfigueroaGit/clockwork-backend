@@ -1,3 +1,4 @@
+// Importing necessary modules
 const express = require('express');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
@@ -7,35 +8,35 @@ const cors = require('cors');
 const passport = require('./middlewares/passport-strategy');
 const cookieParser = require('cookie-parser');
 
-
+// Initializing express app
 const app = express();
 const PORT = 3001;
 
-// Load config
+// Loading environment variables
 dotenv.config();
 
-// Middleware
-app.use(express.json());
-app.use(helmet());
-app.use(morgan('dev'));
-app.use(cors());
-app.use(session
+// Adding middleware to the express app
+app.use(express.json()); // for parsing application/json
+app.use(helmet()); // for setting HTTP headers for security
+app.use(morgan('dev')); // for logging HTTP requests
+app.use(cors()); // for enabling CORS
+app.use(session // for handling sessions
     ({
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true
     }));
-app.use(cookieParser());
-// Passport middleware
+app.use(cookieParser()); // for parsing cookies
+
+// Initializing passport middleware
 app.use(passport.initialize());
 
-// Routes
-app.use('/auth', require('./routes/auth_routes'));
+// Defining routes
+app.use('/auth', require('./routes/auth_routes')); // authentication routes
+app.use('/users', require('./routes/user_routes')); // user routes
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
+// Starting the server
 app.listen(PORT, () => {
     console.log(`Clockwork app listening at http://localhost:${PORT}`);
 });
