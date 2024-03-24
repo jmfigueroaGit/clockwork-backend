@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-    return knex.schema.createTable('members_activity', function (table) {
+    return knex.schema.createTable('members_activities', function (table) {
         table.increments('members_activity_id').primary();
         table.datetime('members_activity_start').defaultTo(knex.fn.now());
         table.datetime('members_activity_end').defaultTo(null);
@@ -27,5 +27,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-    return knex.schema.dropTable('members_activity');
+    return knex.schema.dropTable('members_activities');
 };
