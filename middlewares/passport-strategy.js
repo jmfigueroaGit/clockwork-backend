@@ -1,7 +1,7 @@
 const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
-const knex = require('../config/knexfile').development;
+const knex = require('../knexfile').development;
 const jwtSecret = process.env.JWT_SECRET;
 
 const options = {

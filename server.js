@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const cors = require('cors');
 const passport = require('./middlewares/passport-strategy');
-const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -25,6 +25,7 @@ app.use(session
         resave: false,
         saveUninitialized: true
     }));
+app.use(cookieParser());
 // Passport middleware
 app.use(passport.initialize());
 

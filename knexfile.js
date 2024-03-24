@@ -15,7 +15,10 @@ module.exports = {
       user: process.env.DB_USER_DEV,
       password: process.env.DB_PASS_DEV,
       database: process.env.DB_NAME_DEV,
-    }
+    },
+    migrations: {
+      directory: './migrations',
+    },
   },
 
   staging: {
@@ -29,9 +32,6 @@ module.exports = {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   },
 
   production: {
@@ -45,9 +45,6 @@ module.exports = {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   }
 
 };
