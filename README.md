@@ -23,7 +23,7 @@ Follow these steps to get the project up and running:
    Use the following command to clone the repository to your local machine:
 
    ```
-   git clone https://github.com/yourusername/yourrepository.git
+   git clone https://github.com/jmfigueroaGit/clockwork-backend.git
    ```
 
 2. **Install the dependencies:**
@@ -31,7 +31,7 @@ Follow these steps to get the project up and running:
    Navigate into the project directory and install the necessary dependencies:
 
    ```
-   cd yourrepository
+   cd clockwork-backend
    npm install
    npm install knex
    ```
@@ -39,6 +39,20 @@ Follow these steps to get the project up and running:
 3. **Set up environment variables:**
 
    Create a `.env` file in the root directory and set your environment variables as per the `.env.example` file.
+
+   ```
+    DB_HOST_DEV =
+    DB_USER_DEV =
+    DB_PASS_DEV =
+    DB_PORT_DEV =
+    DB_NAME_DEV =
+    CYPHER_LOGIN_IV =
+    CYPHER_SECRET_KEY =
+    NODE_ENV = "development"
+    SESSION_SECRET=
+    JWT_SECRET=
+
+   ```
 
 4. **Run the migrations:**
 
