@@ -38,5 +38,5 @@ app.use('/users', require('./routes/user_routes')); // user routes
 
 // Starting the server
 app.listen(PORT, () => {
-    console.log(`Clockwork app listening at http://localhost:${PORT}`);
+    console.log(`Clockwork web app listening at http://localhost:${PORT}`);
 });
