@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getMember_Activities, getMember_Activity, createMember_Activity, searchMember_Activities, updateMember_Activity, deleteMember_Activity, getActivityMembers, getMemberActivities } = require('../controllers/member_activity_controllers');
+const { getMember_Activities, getMember_Activity, createMember_Activity, searchMember_Activities, updateMember_Activity, deleteMember_Activity, getActivityMembers, getMemberActivities, getMy_Activities } = require('../controllers/member_activity_controllers');
 const { authenticate, authorize, verify } = require('../middlewares/auth_middleware');
 
 // Route for getting all member_activities
@@ -12,6 +12,15 @@ router.post('/', authenticate, verify, authorize('admin'), createMember_Activity
 // Route for searching member_activities
 router.get('/search', authenticate, verify, authorize('admin'), searchMember_Activities);
 
+// Route for getting all members of an activity
+router.get('/activity/:id', authenticate, verify, getActivityMembers);
+
+// Route for getting all activities of a member
+router.get('/member/:id', authenticate, verify, getMemberActivities);
+
+// Route for getting all activities of a logged in member
+router.get('/my_activities', authenticate, verify, getMy_Activities);
+
 // Route for getting a member_activity by ID
 router.get('/:id', authenticate, verify, getMember_Activity);
 
@@ -20,11 +29,5 @@ router.put('/:id', authenticate, verify, authorize('admin'), updateMember_Activi
 
 // Route for deleting a member_activity by ID
 router.delete('/:id', authenticate, verify, authorize('admin'), deleteMember_Activity);
-
-// Route for getting all members of an activity
-router.get('/activity/:id', authenticate, verify, getActivityMembers);
-
-// Route for getting all activities of a member
-router.get('/member/:id', authenticate, verify, getMemberActivities);
 
 module.exports = router;

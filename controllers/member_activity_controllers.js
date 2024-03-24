@@ -136,4 +136,21 @@ const getMemberActivities = async (req, res) => {
     }
 };
 
-module.exports = { getMember_Activities, getMember_Activity, createMember_Activity, searchMember_Activities, updateMember_Activity, deleteMember_Activity, getActivityMembers, getMemberActivities };
+// Function to get all activities of a logged in member
+const getMy_Activities = async (req, res) => {
+    try {
+        // Getting the member ID from the request
+        const memberId = req.user.id;
+
+        // Getting all activities of a member
+        const activities = await Member_Activity.getMemberActivities(memberId);
+
+        // Sending a success response with the activities data
+        res.status(200).json({ data: activities });
+    } catch (error) {
+        // Sending an error response
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { getMember_Activities, getMember_Activity, createMember_Activity, searchMember_Activities, updateMember_Activity, deleteMember_Activity, getActivityMembers, getMemberActivities, getMy_Activities };
