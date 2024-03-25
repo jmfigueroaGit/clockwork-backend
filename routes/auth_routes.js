@@ -1,6 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, me, logout, forgetPassword, resetPassword, refreshToken, sendAccountVerificationEmail, verifyAccount, changePassword } = require('../controllers/auth_controllers');
+const {
+	register,
+	login,
+	me,
+	logout,
+	forgetPassword,
+	resetPassword,
+	refreshToken,
+	sendAccountVerificationEmail,
+	verifyAccount,
+	changePassword,
+} = require('../controllers/auth_controllers');
 const { authenticate, verify } = require('../middlewares/auth_middleware');
 
 // Route for user registration

@@ -8,94 +8,91 @@ const connectionConfig = knexConfig[environment];
 const knex = knexImport(connectionConfig);
 
 class Activity {
-    // Function to get all activities
-    static async all() {
-        try {
-            // Getting all activities
-            const activities = await knex('activities').select('*');
+	// Function to get all activities
+	static async all() {
+		try {
+			// Getting all activities
+			const activities = await knex('activities').select('*');
 
-            // Returning the activities data
-            return activities;
-        } catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
+			// Returning the activities data
+			return activities;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 
-    // Function to get an activity by ID
-    static async find(activityId) {
-        try {
-            // Getting the activity by ID
-            const activity = await knex('activities').where('activity_id', activityId).first();
+	// Function to get an activity by ID
+	static async find(activityId) {
+		try {
+			// Getting the activity by ID
+			const activity = await knex('activities').where('activity_id', activityId).first();
 
-            if (!activity) throw new Error('Activity not found');
+			if (!activity) throw new Error('Activity not found');
 
-            // Returning the activity data
-            return activity;
-        }
-        catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
+			// Returning the activity data
+			return activity;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 
-    // Function to search for activities
-    static async search(query) {
-        try {
+	// Function to search for activities
+	static async search(query) {
+		try {
+			// Searching for activities
+			const activities = await knex('activities').where('activity_name', 'like', `%${query}%`).select('*');
 
-            // Searching for activities
-            const activities = await knex('activities').where('activity_name', 'like', `%${query}%`).select('*');
+			// Returning the activities data
+			return activities;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 
-            // Returning the activities data
-            return activities;
-        } catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
+	// Function to create a new activity
+	static async create(data) {
+		try {
+			// Creating a new activity
+			const [activityId] = await knex('activities').insert(data);
 
-    // Function to create a new activity
-    static async create(data) {
-        try {
-            // Creating a new activity
-            const [activityId] = await knex('activities').insert(data);
+			// Returning the ID of the newly created activity
+			return activityId;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 
-            // Returning the ID of the newly created activity
-            return activityId;
-        } catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
+	// Function to update an activity by ID
+	static async update(activityId, data) {
+		try {
+			// Updating the activity
+			await knex('activities').where('activity_id', activityId).update(data);
 
-    // Function to update an activity by ID
-    static async update(activityId, data) {
-        try {
-            // Updating the activity
-            await knex('activities').where('activity_id', activityId).update(data);
+			// Returning the ID of the updated activity
+			return activityId;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 
-            // Returning the ID of the updated activity
-            return activityId;
-        } catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
+	// Function to delete an activity by ID
+	static async delete(activityId) {
+		try {
+			// Deleting the activity
+			await knex('activities').where('activity_id', activityId).del();
 
-    // Function to delete an activity by ID
-    static async delete(activityId) {
-        try {
-            // Deleting the activity
-            await knex('activities').where('activity_id', activityId).del();
-
-            // Returning a success message
-            return { message: 'Activity deleted successfully' };
-        } catch (error) {
-            // Throwing an error if any
-            throw new Error(error.message);
-        }
-    }
-
+			// Returning a success message
+			return { message: 'Activity deleted successfully' };
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 }
 
 // Exporting the Activity class

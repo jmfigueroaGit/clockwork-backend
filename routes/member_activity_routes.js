@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { getMember_Activities, getMember_Activity, createMember_Activity, searchMember_Activities, updateMember_Activity, deleteMember_Activity, getActivityMembers, getMemberActivities, getMy_Activities } = require('../controllers/member_activity_controllers');
+const {
+	getMember_Activities,
+	getMember_Activity,
+	createMember_Activity,
+	searchMember_Activities,
+	updateMember_Activity,
+	deleteMember_Activity,
+	getActivityMembers,
+	getMemberActivities,
+	getMy_Activities,
+} = require('../controllers/member_activity_controllers');
 const { authenticate, authorize, verify } = require('../middlewares/auth_middleware');
 
 // Route for getting all member_activities
