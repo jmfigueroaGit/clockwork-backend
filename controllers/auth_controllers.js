@@ -107,7 +107,7 @@ const forgetPassword = async (req, res) => {
 		const { email } = req.body;
 
 		// Generating a token for the user
-		const resetToken = await User.resetToken(email);
+		const resetToken = await Auth.resetToken(email);
 
 		// Sending the reset password email
 		// await sendEmail({
@@ -139,7 +139,7 @@ const resetPassword = async (req, res) => {
 		const { resetToken, password } = req.body;
 
 		// Resetting the password
-		const { message } = await User.resetPassword(resetToken, password);
+		const { message } = await Auth.resetPassword(resetToken, password);
 
 		// Sending a success response
 		res.status(200).json({
@@ -205,7 +205,7 @@ const sendAccountVerificationEmail = async (req, res) => {
 		const { email } = req.user;
 
 		// Generating a token for the user
-		const verifyToken = await User.verifyAccount(email);
+		const verifyToken = await Auth.verifyAccount(email);
 
 		// Sending the reset password email
 		// await sendEmail({
@@ -237,7 +237,7 @@ const verifyAccount = async (req, res) => {
 		const { verifyToken } = req.body;
 
 		// Verifying the account
-		const { message } = await User.verifyVerificationToken(verifyToken);
+		const { message } = await Auth.verifyVerificationToken(verifyToken);
 
 		// Sending a success response
 		res.status(200).json({
@@ -261,7 +261,7 @@ const changePassword = async (req, res) => {
 		const user = req.user;
 
 		// Get password using email and username
-		const password = await User.getPassword(user.email, user.username);
+		const password = await Auth.getPassword(user.email, user.username);
 
 		// Comparing the old password with the current password
 		const isMatch = await bcrypt.compare(oldPassword, password);
