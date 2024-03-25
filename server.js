@@ -20,12 +20,16 @@ app.use(express.json()); // for parsing application/json
 app.use(helmet()); // for setting HTTP headers for security
 app.use(morgan('dev')); // for logging HTTP requests
 app.use(cors()); // for enabling CORS
-app.use(session // for handling sessions
-    ({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true
-    }));
+app.use(
+	session(
+		// for handling sessions
+		{
+			secret: process.env.SESSION_SECRET,
+			resave: false,
+			saveUninitialized: true,
+		}
+	)
+);
 app.use(cookieParser()); // for parsing cookies
 
 // Initializing passport middleware
@@ -37,8 +41,7 @@ app.use('/users', require('./routes/user_routes')); // user routes
 app.use('/activities', require('./routes/activity_routes')); // activity routes
 app.use('/member_activities', require('./routes/member_activity_routes')); // member_activity routes
 
-
 // Starting the server
 app.listen(PORT, () => {
-    console.log(`Clockwork web app listening at http://localhost:${PORT}`);
+	console.log(`Clockwork web app listening at http://localhost:${PORT}`);
 });
