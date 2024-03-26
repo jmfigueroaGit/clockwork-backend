@@ -93,6 +93,20 @@ class Activity {
 			throw new Error(error.message);
 		}
 	}
+
+	// Function to get all activity logs
+	static async logs() {
+		try {
+			// Getting all activity logs
+			const logs = await knex('activity_logs').select('*');
+
+			// Returning the logs data
+			return logs;
+		} catch (error) {
+			// Throwing an error if any
+			throw new Error(error.message);
+		}
+	}
 }
 
 // Exporting the Activity class
