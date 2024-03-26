@@ -24,7 +24,7 @@ router.post('/login', login);
 router.get('/me', authenticate, verify, me);
 
 // Route for user logout, requires authentication
-router.get('/logout', authenticate, logout);
+router.post('/logout', authenticate, logout);
 
 // Route for forgetting password
 router.post('/forget-password', forgetPassword);

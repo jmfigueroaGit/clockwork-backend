@@ -58,10 +58,21 @@ class Auth {
 			if (!member) {
 				throw new Error('Invalid credentials');
 			}
+
 			const valid = await bcrypt.compare(password, member.password);
 			if (!valid) {
 				throw new Error('Invalid credentials');
 			}
+
+			const login_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+			await knex('members')
+				.where({
+					username,
+				})
+				.update({
+					login_time,
+				});
 
 			return {
 				id: member.id,
@@ -325,6 +336,23 @@ class Auth {
 			// If an error occurs, throw an error with the message
 			throw new Error(error.message);
 		}
+	}
+
+	// Method to logout current logged in user
+	static async logout(username) {
+		const logout_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+		await knex('members')
+			.where({
+				username,
+			})
+			.update({
+				logout_time,
+			});
+
+		return {
+			message: 'User logged out successfully',
+		};
 	}
 }
 
