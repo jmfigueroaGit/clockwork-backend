@@ -7,7 +7,7 @@ const connectionConfig = knexConfig[environment];
 // Initializing knex with the connection configuration
 const knex = knexImport(connectionConfig);
 
-class Member_Activity {
+class MemberActivity {
 	// Function to get all member_activities
 	static async all() {
 		try {
@@ -131,4 +131,4 @@ class Member_Activity {
 	}
 }
 
-module.exports = Member_Activity;
+module.exports = MemberActivity;
