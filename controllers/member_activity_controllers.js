@@ -1,10 +1,10 @@
-const Member_Activity = require('../classes/Member_Activity');
+const MemberActivity = require('../classes/Member_Activity');
 
 // Function to get all member_activities
 const getMember_Activities = async (req, res) => {
 	try {
 		// Getting all member_activities
-		const member_activities = await Member_Activity.all();
+		const member_activities = await MemberActivity.all();
 
 		// Sending a success response with the member_activities data
 		res.status(200).json({ data: member_activities });
@@ -21,7 +21,7 @@ const getMember_Activity = async (req, res) => {
 		const member_activityId = req.params.id;
 
 		// Getting the member_activity by ID
-		const member_activity = await Member_Activity.find(member_activityId);
+		const member_activity = await MemberActivity.find(member_activityId);
 
 		// Sending a success response with the member_activity data
 		res.status(200).json({ data: member_activity });
@@ -38,7 +38,7 @@ const createMember_Activity = async (req, res) => {
 		const data = req.body;
 
 		// Creating a new member_activity
-		const member_activityId = await Member_Activity.create(data);
+		const member_activityId = await MemberActivity.create(data);
 
 		// Sending a success response with the ID of the newly created member_activity
 		res.status(201).json({ id: member_activityId });
@@ -55,7 +55,7 @@ const searchMember_Activities = async (req, res) => {
 		const query = req.query.q;
 
 		// Searching for member_activities
-		const member_activities = await Member_Activity.search(query);
+		const member_activities = await MemberActivity.search(query);
 
 		// Sending a success response with the member_activities data
 		res.status(200).json({ data: member_activities });
@@ -75,7 +75,7 @@ const updateMember_Activity = async (req, res) => {
 		const data = req.body;
 
 		// Updating the member_activity by ID
-		await Member_Activity.update(member_activityId, data);
+		await MemberActivity.update(member_activityId, data);
 
 		// Sending a success response
 		res.status(200).json({ message: 'Member Activity updated successfully' });
@@ -92,7 +92,7 @@ const deleteMember_Activity = async (req, res) => {
 		const member_activityId = req.params.id;
 
 		// Deleting the member_activity by ID
-		await Member_Activity.delete(member_activityId);
+		await MemberActivity.delete(member_activityId);
 
 		// Sending a success response
 		res.status(200).json({ message: 'Member Activity deleted successfully' });
@@ -109,7 +109,7 @@ const getActivityMembers = async (req, res) => {
 		const activityId = req.params.id;
 
 		// Getting all members of an activity
-		const members = await Member_Activity.getActivityMembers(activityId);
+		const members = await MemberActivity.getActivityMembers(activityId);
 
 		// Sending a success response with the members data
 		res.status(200).json({ data: members });
@@ -126,7 +126,7 @@ const getMemberActivities = async (req, res) => {
 		const memberId = req.params.id;
 
 		// Getting all activities of a member
-		const activities = await Member_Activity.getMemberActivities(memberId);
+		const activities = await MemberActivity.getMemberActivities(memberId);
 
 		// Sending a success response with the activities data
 		res.status(200).json({ data: activities });
@@ -143,7 +143,7 @@ const getMy_Activities = async (req, res) => {
 		const memberId = req.user.id;
 
 		// Getting all activities of a member
-		const activities = await Member_Activity.getMemberActivities(memberId);
+		const activities = await MemberActivity.getMemberActivities(memberId);
 
 		// Sending a success response with the activities data
 		res.status(200).json({ data: activities });

@@ -91,12 +91,16 @@ const me = async (req, res) => {
 
 // Function to logout a user
 const logout = async (req, res) => {
+	const { username } = req.user;
+
+	const logout_time = await Auth.logout(username);
+
 	// Clearing the token cookie
 	res.clearCookie('token');
 
 	// Sending a success response
 	res.status(200).json({
-		message: 'User logged out successfully',
+		message: logout_time,
 	});
 };
 
