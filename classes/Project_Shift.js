@@ -59,10 +59,13 @@ class ProjectShift {
 	}
 
 	// Function to create a new project_shift for a project
-	static async create(data) {
+	static async create(projectId, data) {
 		try {
 			// Creating a new project_shift for a project
-			await knex('project_shifts').insert(data);
+			await knex('project_shifts').insert({ ...data, project_id: projectId });
+
+			// Returning the project_shift data
+			return data;
 		} catch (error) {
 			// Throwing an error if any
 			throw new Error(error.message);

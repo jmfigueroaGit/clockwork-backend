@@ -9,7 +9,7 @@ const knex = knexImport(connectionConfig);
 
 class ProjectMember {
 	// Function to get all project_members of a project
-	static async getProjectMembers(projectId) {
+	static async all(projectId) {
 		try {
 			// Getting all project_members of a project
 			const projectMembers = await knex('project_members').where('project_id', projectId).select('*');
@@ -23,7 +23,7 @@ class ProjectMember {
 	}
 
 	// Function to get all projects of a member by ID
-	static async getMemberProjects(memberId) {
+	static async userProjects(memberId) {
 		try {
 			// Getting all projects of a member
 			const projects = await knex('project_members').where('member_id', memberId).select('*');
