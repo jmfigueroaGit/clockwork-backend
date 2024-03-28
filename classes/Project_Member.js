@@ -36,16 +36,18 @@ class ProjectMember {
 		}
 	}
 
-	// Function to get a project_member by ID
-	static async find(project_memberId) {
+	// Function to get a project_member by ID for a project
+	static async find(projectId, projectMemberId) {
 		try {
-			// Getting the project_member by ID
-			const project_member = await knex('project_members').where('project_member_id', project_memberId).first();
-
-			if (!project_member) throw new Error('Project Member not found');
+			// Getting a project_member by ID for a project
+			const projectMember = await knex('project_members')
+				.where('project_id', projectId)
+				.where('project_member_id', projectMemberId)
+				.select('*')
+				.first();
 
 			// Returning the project_member data
-			return project_member;
+			return projectMember;
 		} catch (error) {
 			// Throwing an error if any
 			throw new Error(error.message);

@@ -7,10 +7,10 @@ exports.up = function (knex) {
 		table.increments('project_id').primary();
 		table.string('project_name').notNullable();
 		table.string('project_description');
-		table.integer('project_manager').notNullable();
+		table.integer('project_manager');
 		table.integer('project_lead');
-		table.integer('project_director').notNullable();
-		table.integer('project_status').notNullable();
+		table.integer('project_director');
+		table.integer('project_status').notNullable().defaultTo(1);
 		table.timestamp('created_at').defaultTo(knex.fn.now());
 		table.timestamp('updated_at').defaultTo(knex.fn.now());
 	});

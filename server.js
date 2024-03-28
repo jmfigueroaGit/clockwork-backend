@@ -40,6 +40,7 @@ app.use('/auth', require('./routes/auth_routes')); // authentication routes
 app.use('/users', require('./routes/user_routes')); // user routes
 app.use('/activities', require('./routes/activity_routes')); // activity routes
 app.use('/member_activities', require('./routes/member_activity_routes')); // member_activity routes
+app.use('/projects', require('./routes/project_routes')); // project routes
 
 // Starting the server
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
-const Project = require('../models/project');
-const ProjectShift = require('../models/project_shift');
-const ProjectMember = require('../models/project_member');
+const Project = require('../classes/Project');
+const ProjectShift = require('../classes/Project_Shift');
+const ProjectMember = require('../classes/Project_Member');
 
 // Function to get all projects
 const getProjects = async (req, res) => {
@@ -158,26 +158,6 @@ const getProjectShift = async (req, res) => {
 	}
 };
 
-// Function to search for project_shifts for a project
-const searchProjectShifts = async (req, res) => {
-	try {
-		// Getting the project ID from the request
-		const projectId = req.params.id;
-
-		// Getting the search query from the request
-		const query = req.query.q;
-
-		// Searching for project_shifts for the project
-		const project_shifts = await ProjectShift.search(projectId, query);
-
-		// Sending a success response with the project_shifts data
-		res.status(200).json({ data: project_shifts });
-	} catch (error) {
-		// Sending an error response
-		res.status(500).json({ message: error.message });
-	}
-};
-
 // Function to create a new project_shift for a project
 const createProjectShift = async (req, res) => {
 	try {
@@ -258,31 +238,17 @@ const getProjectMembers = async (req, res) => {
 	}
 };
 
-// Function to get all projects of a user by ID
-const getUserProjects = async (req, res) => {
-	try {
-		// Getting the user ID from the request
-		const memberId = req.params.id;
-
-		// Getting all projects of a user
-		const projects = await Project.userProjects(memberId);
-
-		// Sending a success response with the projects data
-		res.status(200).json({ data: projects });
-	} catch (error) {
-		// Sending an error response
-		res.status(500).json({ message: error.message });
-	}
-};
-
-// Function to get a project_member by ID
+// Function to get a project_member by ID for a project
 const getProjectMember = async (req, res) => {
 	try {
 		// Getting the project_member ID from the request
 		const projectMemberId = req.params.memberId;
 
-		// Getting the project_member by ID
-		const project_member = await ProjectMember.find(projectMemberId);
+		// Getting the project ID from the request
+		const projectId = req.params.id;
+
+		// Getting the project_member by ID for the project
+		const project_member = await ProjectMember.find(projectId, projectMemberId);
 
 		// Sending a success response with the project_member data
 		res.status(200).json({ data: project_member });
@@ -358,12 +324,10 @@ module.exports = {
 	userProjects,
 	getProjectShifts,
 	getProjectShift,
-	searchProjectShifts,
 	createProjectShift,
 	updateProjectShift,
 	deleteProjectShift,
 	getProjectMembers,
-	getUserProjects,
 	getProjectMember,
 	addMemberToProject,
 	removeMemberFromProject,
