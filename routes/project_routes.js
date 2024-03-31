@@ -22,7 +22,7 @@ const {
 } = require('../controllers/project_controllers');
 
 // Middleware for routes requiring authentication and authorization
-router.use(authenticate, verify, authorize('admin'));
+router.use(authenticate, verify);
 
 // Route for searching projects
 router.get('/search', searchProjects); // Search for projects
@@ -37,7 +37,7 @@ router
 	.put(updateProject) // Update a specific project by ID
 	.delete(deleteProject); // Delete a specific project by ID
 
-router.get('/user/:id', userProjects); // Get projects for a specific user
+router.get('/user/me', userProjects); // Get projects for a specific user
 
 // Routes for Project Shifts
 router.get('/:id/shifts', getProjectShifts); // Get all shifts for a specific project
@@ -49,8 +49,8 @@ router.delete('/:id/shifts/:shiftId', deleteProjectShift); // Delete a specific 
 // Routes for Project Members
 router.get('/:id/members', getProjectMembers); // Get all members for a specific project
 router.get('/:id/members/:memberId', getProjectMember); // Get a specific member for a specific project
-router.post('/members', addMemberToProject); // Add a member to a project
+router.post('/:id/members', addMemberToProject); // Add a member to a project
 router.delete('/:id/members/:memberId', removeMemberFromProject); // Remove a member from a project
-router.put('/members/:memberId', updateProjectMember); // Update a member's information
+router.put('/:id/members/:memberId', updateProjectMember); // Update a member's information
 
 module.exports = router;

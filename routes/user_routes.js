@@ -1,17 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {
-	getUser,
-	updateUser,
-	deleteUser,
-	getUsers,
-	searchUsers,
-	getUserById,
-} = require('../controllers/user_controllers');
+const { updateUser, deleteUser, getUsers, searchUsers, getUserById } = require('../controllers/user_controllers');
 const { authenticate, authorize, verify } = require('../middlewares/auth_middleware');
-
-// Route for getting user details, requires authentication
-// router.get('/me', authenticate, getUser);
 
 // Route for updating user details, requires authentication
 router.put('/me', authenticate, updateUser);

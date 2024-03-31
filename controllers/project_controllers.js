@@ -104,14 +104,14 @@ const deleteProject = async (req, res) => {
 	}
 };
 
-// Function to get all projects for a user
+// Function to get all projects for a current logged in user
 const userProjects = async (req, res) => {
 	try {
 		// Getting the user ID from the request
-		const userId = req.params.id;
+		const userId = req.user.id;
 
 		// Getting all projects for the user
-		const projects = await Project.userProjects(userId);
+		const projects = await ProjectMember.userProjects(userId);
 
 		// Sending a success response with the projects data
 		res.status(200).json({ data: projects });
@@ -262,10 +262,11 @@ const getProjectMember = async (req, res) => {
 const addMemberToProject = async (req, res) => {
 	try {
 		// Getting the project_member data from the request body
-		const data = req.body;
+		const { member_id } = req.body;
+		const project_id = req.params.id;
 
 		// Adding a member to a project
-		await ProjectMember.addMemberToProject(data);
+		await ProjectMember.addMemberToProject({ member_id, project_id });
 
 		// Sending a success response
 		res.status(201).json({ message: 'Member added to project successfully' });
@@ -299,11 +300,14 @@ const updateProjectMember = async (req, res) => {
 		// Getting the project_member ID from the request
 		const projectMemberId = req.params.memberId;
 
+		// Getting the project ID from the request
+		const projectId = req.params.id;
+
 		// Getting the project_member data from the request body
 		const data = req.body;
 
 		// Updating the project_member
-		await ProjectMember.update(projectMemberId, data);
+		await ProjectMember.update(projectId, projectMemberId, data);
 
 		// Sending a success response
 		res.status(200).json({ message: 'Project Member updated successfully' });

@@ -21,10 +21,10 @@ router.post('/register', register);
 router.post('/login', login);
 
 // Route for getting user details, requires authentication and verification
-router.get('/me', authenticate, verify, me);
+router.get('/me', authenticate, me);
 
 // Route for user logout, requires authentication
-router.post('/logout', authenticate, logout);
+router.get('/logout', authenticate, logout);
 
 // Route for forgetting password
 router.post('/forget-password', forgetPassword);

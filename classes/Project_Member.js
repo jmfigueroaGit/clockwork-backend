@@ -25,8 +25,11 @@ class ProjectMember {
 	// Function to get all projects of a member by ID
 	static async userProjects(memberId) {
 		try {
-			// Getting all projects of a member
-			const projects = await knex('project_members').where('member_id', memberId).select('*');
+			// Getting all projects of a member and nest the project data
+			const projects = await knex('project_members')
+				.where('member_id', memberId)
+				.join('projects', 'projects.project_id', 'project_members.project_id')
+				.select('projects.*', 'project_members.*');
 
 			// Returning the projects data
 			return projects;
@@ -83,13 +86,16 @@ class ProjectMember {
 	}
 
 	// Function to update a project_member by ID
-	static async update(project_memberId, data) {
+	static async update(projectId, project_memberId, data) {
 		try {
-			// Updating the project_member
-			await knex('project_members').where('project_member_id', project_memberId).update(data);
+			// Updating a project_member by ID
+			await knex('project_members')
+				.where('project_id', projectId)
+				.where('project_member_id', project_memberId)
+				.update(data);
 
-			// Returning the ID of the updated project_member
-			return project_memberId;
+			// Returning the updated project_member data
+			return data;
 		} catch (error) {
 			// Throwing an error if any
 			throw new Error(error.message);

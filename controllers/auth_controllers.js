@@ -9,8 +9,8 @@ const { generateToken } = require('../utils/token');
 const register = async (req, res) => {
 	try {
 		// Destructuring request body
-		const { username, email, role, password } = req.body;
-
+		const { username, email, password } = req.body;
+		const role = 'member';
 		// Creating a new user
 		const user = await Auth.create(username, email, role, password);
 
