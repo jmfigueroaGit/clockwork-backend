@@ -46,7 +46,7 @@ app.use('/api/users', require('./routes/user_routes')); // user routes
 app.use('/api/activities', require('./routes/activity_routes')); // activity routes
 app.use('/api/member_activities', require('./routes/member_activity_routes')); // member_activity routes
 app.use('/api/projects', require('./routes/project_routes')); // project routes
-
+app.use('/api/activity_projects', require('./routes/activity_project_routes')); // activity_project routes
 // Starting the server
 app.listen(PORT, () => {
 	console.log(`Clockwork web app listening at http://localhost:${PORT}`);

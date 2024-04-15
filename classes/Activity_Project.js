@@ -8,13 +8,13 @@ const connectionConfig = knexConfig[environment];
 const knex = knexImport(connectionConfig);
 
 class ActivityProject {
-	// Function to get all activity_projects of a project
+	// Function to get all activities of a project
 	static async getActivityProjects(projectId) {
 		try {
-			// Getting all activity_projects of a project
+			// Getting all activities of a project
 			const activityProjects = await knex('activity_projects').where('project_id', projectId).select('*');
 
-			// Returning the activity_projects data
+			// Returning the activities data
 			return activityProjects;
 		} catch (error) {
 			// Throwing an error if any
@@ -23,7 +23,7 @@ class ActivityProject {
 	}
 
 	// Function to get all projects of a activity by ID
-	static async getActivityProjects(activityId) {
+	static async getProjectActivities(activityId) {
 		try {
 			// Getting all projects of a activity
 			const projects = await knex('activity_projects').where('activity_id', activityId).select('*');
