@@ -11,8 +11,11 @@ class ActivityProject {
 	// Function to get all activities of a project
 	static async getActivityProjects(projectId) {
 		try {
-			// Getting all activities of a project
-			const activityProjects = await knex('activity_projects').where('project_id', projectId).select('*');
+			// Getting all activities of a project and concat the activity data
+			const activityProjects = await knex('activity_projects')
+				.join('activities', 'activity_projects.activity_id', 'activities.activity_id')
+				.where('project_id', projectId)
+				.select('*');
 
 			// Returning the activities data
 			return activityProjects;
